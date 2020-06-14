@@ -4,8 +4,11 @@
 int main(){
 
     std::vector<std::vector<int>> graph;
+    int v = 4;
+    int s = 2;
+
     std::vector<int> temp;
-    for(int i = 0; i < 4; i++){
+    for(int i = 0; i < v; i++){
         graph.push_back(temp);
     }
     graph[0].push_back(1);
@@ -15,10 +18,8 @@ int main(){
     graph[2].push_back(3);
     graph[3].push_back(3);
 
-    int s = 2;
-
-    bool * visited = new bool[4];
-    for(int i = 0; i < 4; i++){
+    bool * visited = new bool[v];
+    for(int i = 0; i < v; i++){
 	visited[i] = false;
     }
 
