@@ -5,9 +5,15 @@ public:
     int src, dest, weight;
 }
 
-void quickSort(, low, high){
+int partition(Edge * edge, int low, int high){
+
+    
+
+}
+
+void quickSort(Edge * edge, int low, int high){
     if(low < high){
-	pi = partition(arr, low, high);
+	pi = partition(edge, low, high);
 
 	quickSort(arr, low, pi - 1);
 	quickSort(arr, pi + 1, high);
@@ -43,3 +49,4 @@ int main(){
 
     Edge result[v];
 
+    quickSort(edge);
