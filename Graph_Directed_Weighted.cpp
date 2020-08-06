@@ -5,10 +5,9 @@
 std::vector<std::vector<std::pair<int, int>>> graph;
 
 void addEdge(int u, int v, int weight){
+
     graph[u].push_back(std::make_pair(v, weight));
-    if(u != v){
-        graph[v].push_back(std::make_pair(u, weight));
-    }
+
 }
 
 int main(){
@@ -21,13 +20,14 @@ int main(){
     }
 
     addEdge(0, 1, 10);
-    addEdge(0, 2, 3);
-    addEdge(0, 3, 2);
-    addEdge(1, 3, 7);
-    addEdge(2, 3, 6);
+    addEdge(0, 2, 7);
+    addEdge(0, 3, 6);
+    addEdge(1, 3, 3);
+    addEdge(2, 1, 2);
+    addEdge(3, 2, 1);
 
     for(int i = 0; i < v; i++){
-	std::cout << i << ": ";
+	std::cout << i << ": " << std::endl;
 	for(int j = 0; j < graph[i].size(); j++){
 	    std::cout << graph[i][j].first << " " << graph[i][j].second << std::endl;
 	}

@@ -11,7 +11,6 @@ void addEdge(int u, int v, int weight){
 int main(){
 
     int v = 4;
-    int s = 2;
 
     std::vector<std::pair<int, int>> temp;
     for(int i = 0; i < v; i++){

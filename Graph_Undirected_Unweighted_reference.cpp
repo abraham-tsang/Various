@@ -2,15 +2,17 @@
 #include <vector>
 
 std::vector<std::vector<int>> graph;
+
 void addEdge(int u, int v){
     graph[u].push_back(v);
-    graph[v].push_back(u);
+    if(u != v){
+        graph[v].push_back(u);
+    }
 }
 
 int main(){
 
     int v = 4;
-    int s = 2;
 
     std::vector<int> temp;
     for(int i = 0; i < v; i++){
