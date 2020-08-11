@@ -2,15 +2,19 @@
 #include <vector>
 
 std::vector<std::vector<int>> graph;
+std::vector<bool> visited;
 
-void DFSUtil(int s, bool visited[]){
+void addEdge(int u, int v){
+    graph[u].push_back(v);
+}
 
+void DFSUtil(int s){
     visited[s] = true;
     std::cout << s << " ";
 
     for(int i = 0; i < graph[s].size(); i++){
 	if(!visited[graph[s][i]]){
-            DFSUtil(graph[s][i], visited);
+	    DFSUtil(graph[s][i]);
 	}
     }
 
@@ -19,24 +23,24 @@ void DFSUtil(int s, bool visited[]){
 int main(){
 
     int v = 4;
-    int s = 2;
 
     std::vector<int> temp;
     for(int i = 0; i < v; i++){
 	graph.push_back(temp);
     }
-    graph[0].push_back(1);
-    graph[0].push_back(2);
-    graph[1].push_back(2);
-    graph[2].push_back(0);
-    graph[2].push_back(3);
-    graph[3].push_back(3);
+    addEdge(0, 1);
+    addEdge(0, 2);
+    addEdge(1, 2);
+    addEdge(2, 0);
+    addEdge(2, 3);
+    addEdge(3, 3);
 
-    bool * visited = new bool[v];
+    int s = 2;
+
     for(int i = 0; i < v; i++){
-	visited[i] = false;
+	visited.push_back(false);
     }
 
-    DFSUtil(s, visited);
+    DFSUtil(s);
 
 }

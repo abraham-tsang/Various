@@ -4,6 +4,7 @@
 
 std::vector<std::vector<std::pair<int, int>>> graph;
 std::vector<std::vector<std::pair<int, int>>> mst;
+std::vector<bool> visited;
 
 void addEdge(int u, int v, int weight){
     graph[u].push_back(std::make_pair(v, weight));
@@ -25,32 +26,31 @@ std::pair<int, std::pair<int, int>> findSmallestEdge(){
     return std::make_pair(u, std::make_pair(v, min));
 }
 
-bool cycleFormed(std::pair<int, std::pair<int, int>> edge){
-
-    std::vector<bool> visited;
-    for(int i = 0; i < v; i++){
-	visited.push_back(false);
-    }
-
-    return DFSUtil(edge.first, visited);
-}
-
-bool DFSUtil(int v, std::vector<bool> visited){
+bool DFSUtil(int v){
     visited[v] = true;
-    for(int i = 0; i < mst[i].size(); i++){
-	if(!visited[mst[i].first]){
-            s
+    for(int i = 0; i < mst[v].size(); i++){
+	if(!visited[mst[v][i].first]){
+            return DFSUtil(mst[v][i].first) || false;
 	}
     }
+    return true;
 
 }
+bool cycleFormed(std::pair<int, std::pair<int, int>> edge){
+    return DFSUtil(edge.first);
+}
+
 
 void includeEdge(std::pair<int, std::pair<int, int>> edge){
     mst[edge.first].push_back(std::make_pair(edge.second.first, edge.second.second));
 }
 
-void deleteEdge(std::pair<int, std::pair<int, int>> edge){
-    
+void deleteEdge(std::vector<std::vector<std::pair<int, int>>> which, std::pair<int, std::pair<int, int>> edge){
+    for(int i = 0; i < which[edge.first].size(); i++){
+	if(which[edge.first][i].first == edge.second.first){
+	    which[edge.first].erase(which[edge.first].begin() + i);
+	}
+    }
 }
 
 int main(){
@@ -68,7 +68,11 @@ int main(){
     addEdge(0, 3, 5);
     addEdge(1, 3, 15);
     addEdge(2, 3, 4);
-
+    
+    for(int i = 0; i < v; i++){
+	visited.push_back(false);
+    }
+    
     for(int i = 0; i < v; i++){
 	mst.push_back(temp);
     }
@@ -76,16 +80,19 @@ int main(){
     int it = 0;
     while(it != v - 1){
 	std::pair<int, std::pair<int, int>> edge = findSmallestEdge();
+	includeEdge(edge);
 	if(!cycleFormed(edge)){
-	    includeEdge(edge);
 	    it++;
 	}
-	deleteEdge(edge);
+	else{
+	    deleteEdge(mst, edge);
+	}
+	deleteEdge(graph, edge);
     }
 
     for(int i = 0; i < v; i++){
 	for(int j = 0; j < mst[i].size(); j++){
-	    std::cout << mst[i][j] << " ";
+	    std::cout << mst[i][j].first << " " << mst[i][j].second << std::endl;
 	}
 	std::cout << std::endl;
     }
