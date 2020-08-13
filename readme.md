@@ -5,7 +5,7 @@
 ![Open Source? Yes!](https://badgen.net/badge/Open%20Source%20%3F/Yes%21/blue?icon=github)
 
 ## Getting Started
-Here are some algorithms in c++. 
+This is an algorithm reference in c++. It is best used for studying in school, training for competitive programming, or just a reminder of what they are.
 
 ### Prerequisite
 You need g++ to compile.
