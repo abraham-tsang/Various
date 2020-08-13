@@ -32,8 +32,10 @@ bool DFSUtil(int v){
 	if(!visited[mst[v][i].first]){
             return DFSUtil(mst[v][i].first) || false;
 	}
+	else{
+	    return true;
+	}
     }
-    return true;
 
 }
 bool cycleFormed(std::pair<int, std::pair<int, int>> edge){
@@ -45,11 +47,21 @@ void includeEdge(std::pair<int, std::pair<int, int>> edge){
     mst[edge.first].push_back(std::make_pair(edge.second.first, edge.second.second));
 }
 
-void deleteEdge(std::vector<std::vector<std::pair<int, int>>> which, std::pair<int, std::pair<int, int>> edge){
-    for(int i = 0; i < which[edge.first].size(); i++){
-	if(which[edge.first][i].first == edge.second.first){
-	    which[edge.first].erase(which[edge.first].begin() + i);
-	}
+void deleteEdge(int which, std::pair<int, std::pair<int, int>> edge){
+
+    if(which == 0){
+	for(int i = 0; i < graph[edge.first].size(); i++){
+	    if(graph[edge.first][i].first == edge.second.first){
+	        graph[edge.first].erase(graph[edge.first].begin() + i);
+	    }
+        }
+    }
+    else{
+        for(int i = 0; i < mst[edge.first].size(); i++){
+	    if(mst[edge.first][i].first == edge.second.first){
+	        mst[edge.first].erase(mst[edge.first].begin() + i);
+	    }
+        }
     }
 }
 
@@ -85,14 +97,17 @@ int main(){
 	    it++;
 	}
 	else{
-	    deleteEdge(mst, edge);
+	    deleteEdge(1, edge);
 	}
-	deleteEdge(graph, edge);
+	deleteEdge(0, edge);
+	for(int i = 0; i < v; i++){
+	    visited[i] = false;
+	}
     }
 
     for(int i = 0; i < v; i++){
 	for(int j = 0; j < mst[i].size(); j++){
-	    std::cout << mst[i][j].first << " " << mst[i][j].second << std::endl;
+	    std::cout << i << " " << mst[i][j].first << " " << mst[i][j].second << std::endl;
 	}
 	std::cout << std::endl;
     }
