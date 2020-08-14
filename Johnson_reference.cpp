@@ -10,7 +10,7 @@ public:
 int main(){
 
     int v = 5;
-    int e = 8;
+    int e = 9;
     Edge * edge = new Edge[e];
 
     edge[0].src = 0;
@@ -81,6 +81,7 @@ int main(){
 	int v = edge[i].dest;
 	int weight = edge[i].weight;
 	edge[i].weight = weight + dist[u] - dist[v];
+	//std::cout << u << " " << v << " " << edge[i].weight << std::endl;
     }
 
     for(int i = 0; i < e; i++){
@@ -89,12 +90,12 @@ int main(){
 	        edge[j] = edge[j + 1];
 	    }
 	}
-	std::cout << edge[i].weight << std::endl;
+	//std::cout << edge[i].weight << std::endl;
     }
 
 
 
-    /*for(int i = 0; i < v; i++){
+    /*for(int i = 0; i < v - 1; i++){
 	std::cout << i << " " << dist[i] << std::endl;
     }*/
 
